@@ -85,9 +85,10 @@ template<typename T> void	executeTest(const std::string name)
 int	main(void)
 {
 	srand(time(NULL));
+
 	executeTest< std::list<int> >("list");
 	executeTest< std::vector<int> >("vector");
 	executeTest< std::deque<int> >("deque");
-
+	
 	return (0);
 }
