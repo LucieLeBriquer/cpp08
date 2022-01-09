@@ -65,9 +65,8 @@ std::ostream	&operator<<(std::ostream &o, const Span &span);
 
 typedef std::vector<int>::const_iterator vectIt;
 
-/*
-**		TEMPLATES
-*/
+
+// templated functions
 
 template<typename T> void	Span::fillRange(typename T::iterator begin, typename T::iterator end)
 {

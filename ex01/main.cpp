@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "span.hpp"
-#include <iomanip>
 #include <ctime>
 #define YELLOW "\x1B[33m"
 #define BOLD "\x1B[1m"
