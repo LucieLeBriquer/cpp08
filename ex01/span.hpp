@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:04:33 by lle-briq          #+#    #+#             */
-/*   Updated: 2022/01/09 14:53:00 by lle-briq         ###   ########.fr       */
+/*   Updated: 2022/01/09 22:09:33 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,22 @@ class Span
 		unsigned int		_stored;
 		std::vector<int>	_data;
 
-		
-		
 	public:
 		Span(void);
-		Span(unsigned int N);
+		Span(const unsigned int N);
 		Span(const Span &span);
 		virtual ~Span();
 
 		Span	&operator=(const Span &span);
 
 		// member functions
-		void	addNumber(int n);
+		void	addNumber(const int n);
 		int		shortestSpan(void) const;
 		int		longestSpan(void) const;
-		void	printData(std::ostream &o, unsigned int max = 10) const;
+		void	printData(std::ostream &o, const unsigned int max = 10) const;
+
+		// templated functions
+		template<typename T> void	fillRange(typename T::iterator begin, typename T::iterator end);
 
 		// exceptions
 		class alreadyFull : public std::exception
@@ -45,7 +46,7 @@ class Span
 			public:
 				virtual const char *what() const throw()
 				{
-					 return ("Can't add a new new number (data is already full)");
+					 return ("Span::Exception : data is full");
 				}
 		};
 
@@ -54,7 +55,7 @@ class Span
 			public:
 				virtual const char *what() const throw()
 				{
-					 return ("No span to find (not enough numbers)");
+					 return ("Span::Exception : not enough numbers");
 				}
 		};
 
@@ -63,5 +64,21 @@ class Span
 std::ostream	&operator<<(std::ostream &o, const Span &span);
 
 typedef std::vector<int>::const_iterator vectIt;
+
+/*
+**		TEMPLATES
+*/
+
+template<typename T> void	Span::fillRange(typename T::iterator begin, typename T::iterator end)
+{
+	typename T::iterator	it;
+
+	it = begin;
+	while (it != end)
+	{
+		addNumber(*it);
+		it++;
+	}
+}
 
 #endif

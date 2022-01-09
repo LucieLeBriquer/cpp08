@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:10:28 by lle-briq          #+#    #+#             */
-/*   Updated: 2022/01/09 14:58:55 by lle-briq         ###   ########.fr       */
+/*   Updated: 2022/01/09 22:07:33 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Span::Span(void) : _N(0), _stored(0)
 	return ;
 }
 
-Span::Span(unsigned int N) : _N(N), _stored(0)
+Span::Span(const unsigned int N) : _N(N), _stored(0)
 {
 	return ;
 }
@@ -62,7 +62,7 @@ std::ostream	&operator<<(std::ostream &o, const Span &span)
 **		MEMBER FUNCTIONS
 */
 
-void	Span::addNumber(int n)
+void	Span::addNumber(const int n)
 {
 	if (_stored >= _N)
 		throw Span::alreadyFull();
@@ -87,14 +87,23 @@ int		Span::shortestSpan(void) const
 		throw Span::notEnoughNumbers();
 	
 	vectIt	minIt = std::min_element(_data.begin(), _data.end());
-	int		secondMin = std::min(*std::min_element(_data.begin(), minIt - 1), *std::min_element(minIt + 1, _data.end()));
+	int		secondMin;
+
+	if (minIt == _data.begin())
+		secondMin = *std::min_element(_data.begin() + 1, _data.end());
+	else if (minIt + 1 == _data.end())
+		secondMin = *std::min_element(_data.begin(), _data.end() - 1);
+	else
+		secondMin = std::min(*std::min_element(_data.begin(), minIt - 1), *std::min_element(minIt + 1, _data.end()));
 	return (secondMin - *minIt);
 }
 
-void	Span::printData(std::ostream &o, unsigned int max) const
+void	Span::printData(std::ostream &o, const unsigned int max) const
 {
 	o << "[ ";
 	for (unsigned int i = 0; i < max && i < _stored; i++)
 		o << _data[i] << " ";
+	if (_stored > max)
+		o << "... " << _data[_stored - 1] << " ";
 	o << "] (" << _stored << "/" << _N << ")";
 }

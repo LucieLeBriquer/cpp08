@@ -6,45 +6,33 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:47:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2022/01/09 15:06:05 by lle-briq         ###   ########.fr       */
+/*   Updated: 2022/01/09 22:38:45 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "span.hpp"
 #include <iomanip>
-#define SIZE 52
+#include <ctime>
+#define YELLOW "\x1B[33m"
+#define BOLD "\x1B[1m"
+#define END "\x1B[0m"
 
-static void	printTitle(std::string title, bool toUpper = true)
+
+static void printSubtitle(const std::string subtitle)
 {
-	std::string		toPrint;
-	unsigned int	size = (SIZE > 10 ? SIZE : 10);
-	unsigned int	n;
-
-	toPrint = " " + title + " ";
-	if (toUpper)
-	{
-		for (int i = 0; toPrint[i]; i++)
-			toPrint[i] = toupper(toPrint[i]);
-	}
-	n = toPrint.size();
-	if (n > size)
-	{
-		toPrint = toPrint.substr(0, size - 2);
-		toPrint[size - 4] = '.';
-		toPrint[size - 3] = ' ';
-		n = toPrint.size();
-	}
-	std::cout << std::endl << std::setfill('=') << std::setw(size) << "" << std::endl;
-	std::cout << std::setw(size / 2) << toPrint.substr(0, n / 2);
-	std::cout << toPrint.substr(n / 2, n - n / 2);
-	std::cout << std::setfill('=') << std::setw(size - size / 2 - n + n / 2) << "" << std::endl;
-	std::cout << std::setfill('=') << std::setw(size) << "" << std::endl;
+	static int	i;
+	
+	if (i > 0)
+		std::cout << std::endl;
+	else
+		i++;
+    std::cout << YELLOW << subtitle << END << std::endl;
 }
 
 int	main(void)
 {
 	{
-		printTitle("test subject");
+		printSubtitle("Subject");
 		Span	sp = Span(5);
 
 		sp.addNumber(5);
@@ -54,47 +42,65 @@ int	main(void)
 		sp.addNumber(11);
 		std::cout << sp << std::endl;
 
-		std::cout << sp.shortestSpan() << std::endl;
-		std::cout << sp.longestSpan() << std::endl;
+		std::cout << "shortest span\t" << sp.shortestSpan() << std::endl;
+		std::cout << "longest span \t" << sp.longestSpan() << std::endl;
 	}
 	{
-		printTitle("test exception");
+		printSubtitle("Exceptions");
 		Span	sp = Span(3);
 
 		sp.addNumber(5);
 		std::cout << sp << std::endl;
 
 		try
-		{		
-			std::cout << sp.shortestSpan() << std::endl;
+		{
+			std::cout << "shortest span\t" << sp.shortestSpan() << std::endl;
 		}
 		catch(const std::exception &e)
 		{
+			std::cout << "?\t";
 			std::cerr << e.what() << std::endl;
 		}
 
 		try
 		{		
-			std::cout << sp.longestSpan() << std::endl;
+			std::cout << "longest span \t" << sp.longestSpan() << std::endl;
 		}
 		catch(const std::exception &e)
 		{
+			std::cout << "?\t";
 			std::cerr << e.what() << std::endl;
 		}
 
 		try
 		{	
-			sp.addNumber(6);
+			sp.addNumber(6012);
 			std::cout << sp << std::endl;
-			sp.addNumber(7);
+			sp.addNumber(-791);
 			std::cout << sp << std::endl;
-			sp.addNumber(8);
+			sp.addNumber(832);
 			std::cout << sp << std::endl;
 		}
 		catch(const std::exception &e)
 		{
 			std::cerr << e.what() << std::endl;
 		}
+
+		std::cout << "shortest span\t" << sp.shortestSpan() << std::endl;
+		std::cout << "longest span \t" << sp.longestSpan() << std::endl;
+	}
+	{
+		printSubtitle("Lot of data");
+		std::vector<int>	vect;
+		Span				sp = Span(100000);
+
+		srand(time(NULL));
+		for (int i = 1; i <= 100000; i++)
+			vect.push_back(i);
+		sp.fillRange< std::vector<int> >(vect.begin(), vect.end());
+		std::cout << sp << std::endl;
+		std::cout << "shortest span \t" << sp.shortestSpan() << std::endl;
+		std::cout << "longest span  \t" << sp.longestSpan() << std::endl;
 	}
 	return (0);
 }
