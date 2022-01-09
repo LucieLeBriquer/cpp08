@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "span.hpp"
+#include "Span.hpp"
 #include <ctime>
 #define YELLOW "\x1B[33m"
 #define BOLD "\x1B[1m"
