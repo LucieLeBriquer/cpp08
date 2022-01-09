@@ -22,9 +22,9 @@ class Span
 		unsigned int		_N;
 		unsigned int		_stored;
 		std::vector<int>	_data;
+		Span(void);
 
 	public:
-		Span(void);
 		Span(const unsigned int N);
 		Span(const Span &span);
 		virtual ~Span();

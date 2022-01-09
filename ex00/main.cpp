@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 21:05:51 by lle-briq          #+#    #+#             */
-/*   Updated: 2022/01/08 02:09:16 by lle-briq         ###   ########.fr       */
+/*   Updated: 2022/01/09 22:55:43 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,25 @@ static void	display(int a)
 	std::cout << a << " ";
 }
 
-static void	printTitle(std::string title, bool toUpper = false)
+#include <iostream>
+#include <iomanip>
+#define SIZE 52
+#include <iostream>
+#include <iomanip>
+#define SIZE 52
+
+static void	printTitle(std::string title, bool toUpper = true)
 {
+	static int		first;
 	std::string		toPrint;
 	unsigned int	size = (SIZE > 10 ? SIZE : 10);
+	char			c = '=';
 	unsigned int	n;
+
+	if (first > 0)
+		std::cout << std::endl;
+	else
+		first++;
 
 	toPrint = " " + title + " ";
 	if (toUpper)
@@ -46,12 +60,13 @@ static void	printTitle(std::string title, bool toUpper = false)
 		toPrint[size - 3] = ' ';
 		n = toPrint.size();
 	}
-	std::cout << std::endl << std::setfill('=') << std::setw(size) << "" << std::endl;
+	std::cout << std::setfill(c) << std::setw(size) << "" << std::endl;
 	std::cout << std::setw(size / 2) << toPrint.substr(0, n / 2);
 	std::cout << toPrint.substr(n / 2, n - n / 2);
-	std::cout << std::setfill('=') << std::setw(size - size / 2 - n + n / 2) << "" << std::endl;
-	std::cout << std::setfill('=') << std::setw(size) << "" << std::endl;
+	std::cout << std::setfill(c) << std::setw(size - size / 2 - n + n / 2) << "" << std::endl;
+	std::cout << std::setfill(c) << std::setw(size) << "" << std::endl;
 }
+
 
 static void	printSubtitle(const std::string subtitle)
 {
