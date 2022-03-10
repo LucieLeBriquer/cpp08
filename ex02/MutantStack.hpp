@@ -6,14 +6,13 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 23:06:05 by lle-briq          #+#    #+#             */
-/*   Updated: 2022/01/09 23:52:11 by lle-briq         ###   ########.fr       */
+/*   Updated: 2022/03/10 18:39:30 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MUTANTSTACK_HPP
 # define MUTANTSTACK_HPP
 # include <stack>
-# include <deque>
 
 template<typename T>
 class MutantStack : public std::stack<T>
