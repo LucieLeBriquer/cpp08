@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 23:06:05 by lle-briq          #+#    #+#             */
-/*   Updated: 2022/03/10 18:39:30 by lle-briq         ###   ########.fr       */
+/*   Updated: 2022/03/28 18:55:40 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class MutantStack : public std::stack<T>
 
 		MutantStack	&operator=(const MutantStack<T> &mstack);
 
-		// typedef container_type = deque<T> by default
+		// typedef
 		typedef	typename std::stack<T>::container_type container_type;
 		typedef typename container_type::iterator iterator;
 		typedef typename container_type::const_iterator const_iterator;

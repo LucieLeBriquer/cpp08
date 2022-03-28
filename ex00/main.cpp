@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 21:05:51 by lle-briq          #+#    #+#             */
-/*   Updated: 2022/01/09 22:55:43 by lle-briq         ###   ########.fr       */
+/*   Updated: 2022/03/28 18:50:40 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ static void	display(int a)
 {
 	std::cout << a << " ";
 }
-
-#include <iostream>
-#include <iomanip>
-#define SIZE 52
-#include <iostream>
-#include <iomanip>
-#define SIZE 52
 
 static void	printTitle(std::string title, bool toUpper = true)
 {
