@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   span.cpp                                           :+:      :+:    :+:   */
+/*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 14:10:28 by lle-briq          #+#    #+#             */
-/*   Updated: 2022/01/09 22:07:33 by lle-briq         ###   ########.fr       */
+/*   Updated: 2022/03/29 18:09:54 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,16 @@ int		Span::longestSpan(void) const
 
 int		Span::shortestSpan(void) const
 {
+	std::vector<int>	copy = _data;
+	long				minSpan = std::numeric_limits<long>::max();
+
 	if (_stored <= 1)
 		throw Span::notEnoughNumbers();
 	
-	vectIt	minIt = std::min_element(_data.begin(), _data.end());
-	int		secondMin;
-
-	if (minIt == _data.begin())
-		secondMin = *std::min_element(_data.begin() + 1, _data.end());
-	else if (minIt + 1 == _data.end())
-		secondMin = *std::min_element(_data.begin(), _data.end() - 1);
-	else
-		secondMin = std::min(*std::min_element(_data.begin(), minIt - 1), *std::min_element(minIt + 1, _data.end()));
-	return (secondMin - *minIt);
+	sort(copy.begin(), copy.end());
+	for (size_t i = 0; i + 1 < _data.size(); i++)
+		minSpan = std::min(minSpan, static_cast<long>(copy[i + 1] - copy[i]));
+	return (minSpan);
 }
 
 void	Span::printData(std::ostream &o, const unsigned int max) const

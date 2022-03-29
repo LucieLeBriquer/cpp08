@@ -15,6 +15,7 @@
 # include <algorithm>
 # include <vector>
 # include <iostream>
+# include <limits>
 
 class Span
 {
@@ -64,7 +65,6 @@ class Span
 std::ostream	&operator<<(std::ostream &o, const Span &span);
 
 typedef std::vector<int>::const_iterator vectIt;
-
 
 // templated functions
 
